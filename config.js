@@ -2,11 +2,11 @@
 module.exports = {
   // API配置
   UPSTREAM_URL: 'https://chat.z.ai/api/chat/completions',
-  DEFAULT_KEY: 'sk-your-key', // 下游客户端鉴权key
-  UPSTREAM_TOKEN: '', // 上游API的token（回退用）
+  DEFAULT_KEY: process.env.DEFAULT_KEY || 'sk-your-key', // 下游客户端鉴权key，优先使用环境变量
+  UPSTREAM_TOKEN: process.env.UPSTREAM_TOKEN || '', // 上游API的token（回退用），优先使用环境变量
   MODEL_NAME: 'GLM-4.5',
   PORT: process.env.PORT || 5566,
-  DEBUG_MODE: process.env.DEBUG_MODE === 'true' || false, // debug模式开关
+  DEBUG_MODE: process.env.DEBUG_MODE === 'true' || true, // debug模式开关
 
   // 思考内容处理策略
   THINK_TAGS_MODE: 'strip', // strip: 去除<details>标签；think: 转为<span>标签；raw: 保留原样
@@ -20,7 +20,7 @@ module.exports = {
   ORIGIN_BASE: 'https://chat.z.ai',
 
   // 匿名token开关
-  ANON_TOKEN_ENABLED: true,
+  ANON_TOKEN_ENABLED: process.env.ANON_TOKEN_ENABLED === 'false' ? false : true, // 默认为true，除非明确设置为false
 
   // 上游模型ID
   UPSTREAM_MODEL_ID: '0727-360B-API'

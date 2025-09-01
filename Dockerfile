@@ -20,5 +20,11 @@ EXPOSE 5566
 ENV NODE_ENV=production
 ENV PORT=5566
 
+# 可配置的环境变量（在运行时通过 -e 参数设置）
+# ENV DEFAULT_KEY=sk-your-key
+# ENV UPSTREAM_TOKEN=
+# ENV DEBUG_MODE=true
+# ENV ANON_TOKEN_ENABLED=true
+
 # 启动应用程序
 CMD ["npm", "start"]
