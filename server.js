@@ -4,27 +4,27 @@ const cors = require('cors');
 const { v4: uuidv4 } = require('uuid');
 const { createServer } = require('http');
 
-// 配置常量
-const UPSTREAM_URL = 'https://chat.z.ai/api/chat/completions';
-const DEFAULT_KEY = 'sk-your-key'; // 下游客户端鉴权key
-const UPSTREAM_TOKEN = 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImJmM2FmNDc3LWU1MzEtNDYyOS1hNDczLTNlNzUxMGE0YjAxZiIsImVtYWlsIjoiYXVnaHVtZXM4QGdtYWlsLmNvbSJ9.gWiKC9ezbYl_asEw5S0Gs2cvkPoji5OA9pdbldNQQwmgU1ZWEKZFobbSHkAycQ4j2Wwx01PDC-cbxozDuJyqgQ'; // 上游API的token（回退用）
-const MODEL_NAME = 'GLM-4.5';
-const PORT = process.env.PORT || 5566;
-const DEBUG_MODE = process.env.DEBUG_MODE === 'true' || true; // debug模式开关
+// 导入配置
+const config = require('./config');
 
-// 思考内容处理策略
-const THINK_TAGS_MODE = 'strip'; // strip: 去除<details>标签；think: 转为<span>标签；raw: 保留原样
-
-// 伪装前端头部（来自抓包）
-const X_FE_VERSION = 'prod-fe-1.0.70';
-const BROWSER_UA = 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/139.0.0.0 Safari/537.36 Edg/139.0.0.0';
-const SEC_CH_UA = '"Not;A=Brand";v="99", "Microsoft Edge";v="139", "Chromium";v="139"';
-const SEC_CH_UA_MOB = '?0';
-const SEC_CH_UA_PLAT = '"Windows"';
-const ORIGIN_BASE = 'https://chat.z.ai';
-
-// 匿名token开关
-const ANON_TOKEN_ENABLED = true;
+// 从配置中获取常量
+const {
+  UPSTREAM_URL,
+  DEFAULT_KEY,
+  UPSTREAM_TOKEN,
+  MODEL_NAME,
+  PORT,
+  DEBUG_MODE,
+  THINK_TAGS_MODE,
+  X_FE_VERSION,
+  BROWSER_UA,
+  SEC_CH_UA,
+  SEC_CH_UA_MOB,
+  SEC_CH_UA_PLAT,
+  ORIGIN_BASE,
+  ANON_TOKEN_ENABLED,
+  UPSTREAM_MODEL_ID
+} = config;
 
 // 创建Express应用
 const app = express();
@@ -144,7 +144,7 @@ app.post('/v1/chat/completions', async (req, res) => {
     stream: true, // 总是使用流式从上游获取
     chat_id: chatID,
     id: msgID,
-    model: '0727-360B-API', // 上游实际模型ID
+    model: UPSTREAM_MODEL_ID, // 上游实际模型ID
     messages: messages,
     params: {},
     features: {
@@ -156,8 +156,8 @@ app.post('/v1/chat/completions', async (req, res) => {
     },
     mcp_servers: [],
     model_item: {
-      id: '0727-360B-API',
-      name: 'GLM-4.5',
+      id: UPSTREAM_MODEL_ID,
+      name: MODEL_NAME,
       owned_by: 'openai'
     },
     tool_servers: [],

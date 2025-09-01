@@ -71,9 +71,9 @@ PORT=5566
 DEBUG_MODE=true
 ```
 
-### 修改配置
+### 配置文件
 
-在 `server.js` 文件中可以修改以下配置：
+所有配置常量都集中在 `config.js` 文件中，包括：
 
 - `UPSTREAM_URL`: 上游API地址
 - `DEFAULT_KEY`: 下游客户端鉴权key
@@ -81,6 +81,8 @@ DEBUG_MODE=true
 - `MODEL_NAME`: 模型名称
 - `THINK_TAGS_MODE`: 思考内容处理策略
 - `ANON_TOKEN_ENABLED`: 匿名token开关
+- `UPSTREAM_MODEL_ID`: 上游实际模型ID
+- 伪装前端头部相关配置
 
 ## API使用
 
@@ -126,6 +128,7 @@ curl -X POST http://localhost:5566/v1/chat/completions \
 zai2api/
 ├── package.json          # 项目依赖和脚本
 ├── server.js            # 主服务器文件
+├── config.js            # 配置文件
 ├── Dockerfile           # Docker构建文件
 ├── .dockerignore        # Docker忽略文件
 └── README.md            # 项目说明文档
