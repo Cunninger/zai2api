@@ -1,7 +1,5 @@
 # ZAI2API - OpenAI兼容API服务器 (Node.js版本)
 
-这是一个将Go语言版本的OpenAI兼容API服务器转换为Node.js版本的项目，支持Docker一键部署。
-
 ## 功能特性
 
 - OpenAI API兼容接口
