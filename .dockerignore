@@ -1,0 +1,38 @@
+# 依赖目录
+node_modules
+npm-debug.log*
+
+# 运行时生成的文件
+.DS_Store
+.vscode
+.idea
+
+# 日志文件
+*.log
+
+# 环境变量文件
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# 测试文件和覆盖率报告
+coverage
+.nyc_output
+
+# Git相关
+.git
+.gitignore
+
+# Docker相关（避免在构建过程中包含自身）
+Dockerfile
+.dockerignore
+
+# 文档文件
+README.md
+docs
+
+# 其他临时文件
+tmp
+temp
