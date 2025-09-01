@@ -3,7 +3,7 @@ module.exports = {
   // API配置
   UPSTREAM_URL: 'https://chat.z.ai/api/chat/completions',
   DEFAULT_KEY: 'sk-your-key', // 下游客户端鉴权key
-  UPSTREAM_TOKEN: 'eyJhbGciOiJFUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjMxNmJjYjQ4LWZmMmYtNGExNS04NTNkLWYyYTI5YjY3ZmYwZiIsImVtYWlsIjoiR3Vlc3QtMTc1NTg0ODU4ODc4OEBndWVzdC5jb20ifQ.PktllDySS3trlyuFpTeIZf-7hl8Qu1qYF3BxjgIul0BrNux2nX9hVzIjthLXKMWAf9V0qM8Vm_iyDqkjPGsaiQ', // 上游API的token（回退用）
+  UPSTREAM_TOKEN: '', // 上游API的token（回退用）
   MODEL_NAME: 'GLM-4.5',
   PORT: process.env.PORT || 5566,
   DEBUG_MODE: process.env.DEBUG_MODE === 'true' || false, // debug模式开关
